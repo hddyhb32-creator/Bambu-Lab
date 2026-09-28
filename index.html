@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ef">
+  <meta name="description" content="The Tiny Version — an experimental ultra-compact enclosed CoreXY 3D printer project.">
+  <title>The Tiny Version — A small-scale 3D printer project</title>
+  <style>
+    :root{--paper:#f4f3ef;--ink:#171815;--muted:#777970;--line:#deded7;--orange:#f15a32;--green:#b8c99c;--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit}::selection{background:var(--orange);color:white}
+    .wrap{width:min(1180px,calc(100% - 64px));margin:auto}.nav{height:76px;position:sticky;top:0;z-index:10;background:rgba(244,243,239,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(23,24,21,.1)}.nav-inner{height:100%;width:min(1320px,calc(100% - 64px));margin:auto;display:flex;align-items:center;justify-content:space-between}.brand{font-size:15px;font-weight:750;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:10px}.brand-mark{width:27px;height:27px;background:var(--orange);border-radius:50%;display:grid;place-items:center;color:white;font-size:14px}.brand small{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0}.nav-links{display:flex;gap:30px;align-items:center}.nav-links a{font-size:12px;text-decoration:none;color:#55574f;transition:color .2s}.nav-links a:hover{color:var(--orange)}.nav-cta{border:1px solid var(--ink);border-radius:99px;padding:10px 16px!important;color:var(--ink)!important}.nav-cta:hover{background:var(--ink);color:white!important}
+    .hero{padding:92px 0 42px;overflow:hidden}.hero-top{display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px}.kicker,.label{font-size:10px;letter-spacing:.17em;text-transform:uppercase;font-weight:700;color:var(--muted)}.kicker{display:flex;align-items:center;gap:10px;margin-bottom:23px}.dot{width:7px;height:7px;background:var(--orange);border-radius:50%;box-shadow:0 0 0 4px rgba(241,90,50,.12)}h1{font-size:clamp(66px,11vw,144px);letter-spacing:-.095em;line-height:.82;margin:0;font-weight:650;max-width:900px}h1 em{font-family:var(--serif);font-weight:400;letter-spacing:-.09em}.hero-aside{max-width:250px;padding-bottom:7px;color:var(--muted);font-size:13px;line-height:1.65}.hero-aside strong{color:var(--ink);font-weight:600}.visual{height:clamp(330px,51vw,610px);margin-top:50px;position:relative;border-radius:5px;overflow:hidden;background:#d8d8d1;isolation:isolate}.visual::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,17,15,.02),rgba(15,17,15,.15)),url('printer.jpg') center 54%/cover no-repeat;z-index:-2;transform:scale(1.015)}.visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,15,.5),transparent 68%),linear-gradient(0deg,rgba(15,17,15,.38),transparent 48%);z-index:-1}.visual-copy{position:absolute;left:clamp(24px,5vw,64px);top:clamp(28px,5vw,64px);color:white}.visual-copy span{font-size:10px;text-transform:uppercase;letter-spacing:.15em;opacity:.76}.visual-copy h2{font-size:clamp(30px,4.5vw,54px);letter-spacing:-.065em;line-height:.96;margin:14px 0 0;font-weight:550}.visual-caption{position:absolute;bottom:24px;left:clamp(24px,5vw,64px);color:rgba(255,255,255,.8);font-size:11px;letter-spacing:.04em}.visual-index{position:absolute;right:clamp(20px,4vw,52px);bottom:24px;color:white;font:italic 13px var(--serif)}
+    .intro{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;padding:105px 0 115px;border-bottom:1px solid var(--line)}.intro h2,.section-heading{font-size:clamp(40px,6vw,76px);line-height:.96;letter-spacing:-.075em;font-weight:550;margin:16px 0 0}.intro h2 em,.section-heading em{font-family:var(--serif);font-weight:400}.intro-copy{padding-top:33px;max-width:570px}.intro-copy p{font-size:17px;line-height:1.75;color:#65675f;margin:0 0 25px}.text-link{font-size:12px;font-weight:650;text-decoration:none;border-bottom:1px solid var(--orange);padding-bottom:5px}.text-link span{color:var(--orange);margin-left:8px}
+    .details{padding:105px 0 112px}.section-head{display:flex;justify-content:space-between;gap:40px;align-items:end}.section-head .section-heading{max-width:610px}.section-note{max-width:275px;color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:5px}.spec-grid{margin-top:53px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}.spec{padding:25px 18px 23px 0;border-bottom:1px solid var(--line)}.spec+.spec{padding-left:20px;border-left:1px solid var(--line)}.spec strong{display:block;font-size:24px;letter-spacing:-.06em;font-weight:600}.spec span{display:block;color:var(--muted);font-size:11px;margin-top:8px}
+    .principles{background:#e8e8e1;padding:100px 0 110px}.principles-top{display:flex;justify-content:space-between;gap:40px;align-items:end}.principles-top p{max-width:310px;font-size:13px;line-height:1.7;color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:48px}.card{background:var(--paper);padding:28px 28px 32px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s,background .25s}.card:hover{transform:translateY(-4px);background:white}.card-top{display:flex;justify-content:space-between;align-items:center}.card-num{font:italic 14px var(--serif);color:var(--orange)}.card-icon{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:14px}.card h3{font-size:22px;letter-spacing:-.05em;font-weight:580;margin:28px 0 8px}.card p{font-size:12px;color:var(--muted);line-height:1.7;margin:0;max-width:290px}
+    .roadmap{padding:105px 0 110px}.roadmap-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}.roadmap-intro p{max-width:300px;color:var(--muted);font-size:13px;line-height:1.75;margin-top:24px}.steps{border-top:1px solid var(--line)}.step{display:grid;grid-template-columns:52px 1fr auto;gap:15px;align-items:start;padding:22px 0;border-bottom:1px solid var(--line)}.step-number{font:italic 13px var(--serif);color:var(--orange);padding-top:3px}.step h3{font-size:17px;letter-spacing:-.04em;margin:0 0 6px;font-weight:600}.step p{font-size:11px;color:var(--muted);line-height:1.65;margin:0;max-width:390px}.status{font-size:9px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:var(--muted);white-space:nowrap}.status.active{color:#557047;border-color:#b7c8a7;background:#edf1e7}
+    .join{background:var(--ink);color:var(--paper);padding:72px clamp(26px,7vw,90px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:35px;margin-bottom:70px;position:relative;overflow:hidden}.join::after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(255,255,255,.09);border-radius:50%;right:15%;top:-210px;box-shadow:0 0 0 35px rgba(255,255,255,.025),0 0 0 70px rgba(255,255,255,.02)}.join .label{color:#a9aaa2}.join h2{font-size:clamp(42px,6vw,74px);letter-spacing:-.075em;line-height:.92;font-weight:550;margin:17px 0 14px}.join h2 em{font-family:var(--serif);font-weight:400}.join p{color:#a9aaa2;font-size:12px;margin:0}.join-actions{display:flex;gap:9px;position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid rgba(255,255,255,.28);border-radius:99px;text-decoration:none;font-size:11px;transition:.2s}.pill:hover{background:var(--paper);color:var(--ink)}.pill.primary{background:var(--orange);border-color:var(--orange);color:white}.pill.primary:hover{background:#ff7049;border-color:#ff7049;color:white}.pill span{font-size:15px}
+    footer{width:min(1320px,calc(100% - 64px));margin:auto;padding:0 0 28px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px}.footer-brand{font-weight:700;color:var(--ink);letter-spacing:-.03em}.footer-right{display:flex;gap:25px}.footer-right a{text-decoration:none}.footer-right a:hover{color:var(--orange)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}.skip{position:absolute;left:12px;top:-50px;background:var(--ink);color:white;padding:10px 14px;z-index:20}.skip:focus{top:12px}
+    .nav-menu{position:relative}.nav-menu summary{list-style:none;cursor:pointer;font-size:12px;color:#55574f;padding:12px 0}.nav-menu summary::-webkit-details-marker{display:none}.nav-menu summary::after{content:'⌄';margin-left:7px;color:var(--orange)}.nav-menu[open] summary::after{content:'⌃'}.menu-panel{position:absolute;top:calc(100% + 14px);right:-18px;width:245px;padding:10px;background:var(--paper);border:1px solid var(--line);box-shadow:0 18px 50px #17181520;border-radius:8px}.menu-panel a{display:flex;justify-content:space-between;padding:12px;border-radius:5px;text-decoration:none;font-size:12px;color:var(--ink)}.menu-panel a:hover{background:#e8e8e1}.menu-panel small{color:var(--muted);font-size:10px}.menu-divider{border:0;border-top:1px solid var(--line);margin:6px 10px}
+    .faq{padding:30px 0 100px;display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}.faq h2{font-size:clamp(36px,5vw,60px);letter-spacing:-.07em;line-height:.95;font-weight:550;margin:16px 0}.faq-list{border-top:1px solid var(--line)}.faq details{border-bottom:1px solid var(--line);padding:17px 0}.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-size:14px;font-weight:600}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:'+';font-size:20px;font-weight:400;color:var(--orange);line-height:1}.faq details[open] summary::after{content:'−'}.faq details p{max-width:540px;color:var(--muted);font-size:12px;line-height:1.7;margin:12px 28px 0 0}
+    .beta{padding:100px 0 105px;background:#e8e8e1}.beta-head{display:flex;justify-content:space-between;align-items:end;gap:35px}.beta-head .section-heading{margin-top:14px}.beta-intro{max-width:300px;color:var(--muted);font-size:12px;line-height:1.7;margin:0 0 5px}.beta-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}.beta-step{background:var(--paper);min-height:165px;padding:22px 23px;display:flex;flex-direction:column;justify-content:space-between}.beta-step-top{display:flex;justify-content:space-between;align-items:center}.beta-number{font:italic 14px var(--serif);color:var(--orange)}.beta-arrow{color:#a6a79f;font-size:14px}.beta-step h3{font-size:16px;letter-spacing:-.035em;font-weight:600;margin:20px 0 0}.beta-step p{font-size:11px;color:var(--muted);line-height:1.6;margin:7px 0 0}.beta-note{margin-top:18px;font-size:10px;color:var(--muted)}
+    .portable-card{margin-top:38px;border:1px solid var(--line);background:#fff;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;text-align:left;color:var(--ink);font:inherit;cursor:pointer;transition:border-color .2s,transform .2s;width:100%}.portable-card:hover{border-color:var(--orange);transform:translateY(-2px)}.portable-card-copy{display:flex;align-items:center;gap:20px}.portable-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#edf1e7;color:#557047;font-size:21px;flex:none}.portable-card .label{display:block;margin-bottom:6px}.portable-card h3{font-size:20px;letter-spacing:-.05em;margin:0;font-weight:600}.portable-card p{font-size:11px;color:var(--muted);margin:6px 0 0}.portable-open{border:1px solid var(--line);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;flex:none}.portable-panel{margin-top:12px;padding:34px;background:#fff;border:1px solid var(--line)}.portable-panel[hidden]{display:none}.portable-panel-head{display:flex;justify-content:space-between;align-items:start;gap:24px}.portable-panel h3{font-size:clamp(26px,4vw,42px);letter-spacing:-.06em;margin:8px 0 10px}.portable-panel-head p{max-width:600px;color:var(--muted);font-size:12px;line-height:1.75;margin:0}.close-panel{border:1px solid var(--line);background:transparent;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:17px}.portable-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:25px}.portable-item{background:var(--paper);padding:19px}.portable-item b{font-size:13px}.portable-item p{font-size:11px;line-height:1.65;color:var(--muted);margin:8px 0 0}.portable-extra{margin-top:24px;padding:18px 20px;background:#edf1e7}.portable-extra h4{font-size:12px;margin:0 0 8px}.portable-extra p{font-size:11px;color:#5d6455;line-height:1.65;margin:0}.portable-disclaimer{font-size:10px;color:var(--muted);line-height:1.6;margin:15px 0 0}
+    @media(max-width:760px){.wrap,.nav-inner,footer{width:calc(100% - 38px)}.nav{height:66px}.nav-links{gap:13px}.nav-links>a:not(.nav-cta){display:none}.nav-menu summary{font-size:11px}.menu-panel{right:-62px}.nav-cta{padding:9px 13px!important;font-size:10px!important}.brand{font-size:13px}.brand small{display:none}.hero{padding-top:65px}.hero-top{grid-template-columns:1fr}.hero-aside{max-width:350px;padding:0;font-size:12px}.hero h1{font-size:clamp(62px,15vw,108px)}.visual{margin-top:32px;height:420px}.visual::before{background-position:58% center}.intro{grid-template-columns:1fr;gap:16px;padding:75px 0}.intro-copy{padding-top:0}.section-head,.principles-top,.beta-head{display:block}.section-note,.principles-top p,.beta-intro{margin-top:18px}.details,.roadmap{padding:75px 0}.beta{padding:75px 0}.spec-grid{grid-template-columns:repeat(2,1fr);margin-top:35px}.spec{padding:19px 10px 19px 0}.spec:nth-child(3){border-left:0;padding-left:0}.spec:nth-child(4){padding-left:16px}.cards{grid-template-columns:1fr;margin-top:30px}.card{min-height:180px;padding:23px}.roadmap-layout,.faq{grid-template-columns:1fr;gap:38px}.beta-steps{grid-template-columns:repeat(2,1fr);margin-top:30px}.beta-step{min-height:145px;padding:18px}.step{grid-template-columns:35px 1fr auto;gap:8px}.step p{max-width:330px}.join{grid-template-columns:1fr;padding:45px 25px;margin-bottom:48px}.join-actions{flex-wrap:wrap}.pill{padding:12px 15px}footer{align-items:flex-start;gap:18px;flex-direction:column}.footer-right{gap:18px}}
+    @media(max-width:420px){.nav-links{gap:10px}.visual{height:350px}.visual-copy h2{font-size:32px}.step{grid-template-columns:27px 1fr}.status{grid-column:2;justify-self:start}.spec strong{font-size:21px}.footer-right{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+    @media(max-width:760px){.portable-grid{grid-template-columns:1fr}.portable-card{padding:18px}.portable-panel{padding:22px}.nav-menu,.nav-cta{display:none}.journal-button{padding:10px 13px;font-size:10px}}
+    .journal-button{border:0;border-radius:99px;background:var(--orange);color:#fff;padding:11px 16px;font:600 11px var(--sans);cursor:pointer;white-space:nowrap}.journal-button:hover{background:#d94c29}.nav-links{gap:18px}.journal-toast{position:fixed;top:88px;right:22px;z-index:30;background:var(--ink);color:white;padding:13px 18px;border-radius:6px;box-shadow:0 8px 28px #17181530;font-size:12px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .25s,transform .25s}.journal-toast.show{opacity:1;transform:translateY(0)}.journal-backdrop{position:fixed;inset:0;z-index:40;background:#17181580;display:flex;justify-content:flex-end;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}.journal-backdrop.open{opacity:1;visibility:visible}.journal-drawer{background:var(--paper);width:min(600px,100%);height:100%;overflow:auto;padding:28px;transform:translateX(30px);transition:transform .25s}.journal-backdrop.open .journal-drawer{transform:none}.journal-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:20px}.journal-head h2{margin:5px 0 0;font-size:32px;letter-spacing:-.06em}.journal-close{border:1px solid var(--line);background:transparent;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}.journal-form{padding:22px 0;border-bottom:1px solid var(--line)}.journal-form label{display:block;font-size:11px;font-weight:650;margin:0 0 7px}.journal-form input,.journal-form textarea{width:100%;border:1px solid var(--line);background:white;border-radius:4px;padding:11px;font:12px var(--sans);margin-bottom:14px}.journal-form textarea{min-height:90px;resize:vertical}.journal-form input[type=file]{padding:9px}.journal-form button{border:0;background:var(--ink);color:white;border-radius:99px;padding:12px 18px;font:600 11px var(--sans);cursor:pointer}.journal-form button:disabled{opacity:.5;cursor:wait}.journal-help{font-size:10px;color:var(--muted);margin:0 0 12px}.journal-list{padding-top:18px}.journal-entry{padding:18px 0;border-bottom:1px solid var(--line)}.journal-entry time{font-size:10px;color:var(--orange);font-weight:650}.journal-entry p{font-size:13px;line-height:1.65;white-space:pre-wrap;margin:8px 0}.journal-entry img{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:4px;margin-top:10px}.journal-empty{font-size:12px;color:var(--muted);padding:18px 0}.journal-local-note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:15px}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="The Tiny Version home"><span class="brand-mark">t</span> TINY VERSION <small>/ an independent 3D printer project</small></a>
+      <div class="nav-links"><a href="#project">Project</a><a href="#details">Details</a><a href="#roadmap">Roadmap</a><details class="nav-menu"><summary>Explore</summary><div class="menu-panel"><a href="#top">Home <small>↑</small></a><a href="#project">About the project <small>01</small></a><a href="#details">Specs &amp; design <small>02</small></a><a href="#roadmap">Development roadmap <small>03</small></a><a href="#beta">Become a beta tester <small>04</small></a><a href="#faq">Frequently asked questions <small>05</small></a><hr class="menu-divider"><a href="https://github.com/hddyhb32-creator" target="_blank" rel="noopener noreferrer">GitHub <small>↗</small></a><a href="https://discord.gg/AghCkgQVH" target="_blank" rel="noopener noreferrer">Discord <small>↗</small></a></div></details><a class="nav-cta" href="#community">Get involved <span aria-hidden="true">↗</span></a><button class="journal-button" id="journal-open" type="button">Build journal</button></div>
+    </div>
+  </nav>
+  <div class="journal-toast" id="journal-toast" role="status" aria-live="polite">Keep going — every small step gets you closer. You’ve got this!</div>
+  <div class="journal-backdrop" id="journal-backdrop" aria-hidden="true"><aside class="journal-drawer" role="dialog" aria-modal="true" aria-labelledby="journal-title"><div class="journal-head"><div><div class="label">The Tiny Version</div><h2 id="journal-title">Build journal</h2></div><button class="journal-close" id="journal-close" type="button" aria-label="Close build journal">×</button></div><form class="journal-form" id="journal-form"><label for="journal-text">Today’s build update</label><textarea id="journal-text" placeholder="What did you work on today?" required></textarea><label for="journal-photos">Add photos (optional)</label><input id="journal-photos" type="file" accept="image/*" multiple><p class="journal-help">Images are resized to fit. Add an update whenever you make progress.</p><button id="journal-submit" type="submit">＋ Add journal entry</button></form><div class="journal-list" id="journal-list" aria-live="polite"></div><p class="journal-local-note">Journal entries and photos are saved in this browser on this device. They are not uploaded or shared with other visitors.</p></aside></div>
+  <main id="main">
+    <header class="hero wrap" id="top">
+      <div class="hero-top">
+        <div><div class="kicker"><i class="dot"></i> A compact CoreXY experiment</div><h1>The joy of<br><em>making,</em> made small.</h1></div>
+        <p class="hero-aside"><strong>A tiny enclosed 3D printer, imagined from the ground up.</strong><br>One independent maker project exploring how much machine can fit on a small desk.</p>
+      </div>
+      <div class="visual" role="img" aria-label="A close look at the Tiny Version 3D printer project">
+        <div class="visual-copy"><span>01 / The Tiny Version</span><h2>Small footprint.<br>Big ideas.</h2></div>
+        <div class="visual-caption">AN EXPERIMENT IN COMPACT 3D PRINTING</div><div class="visual-index">Design study · 2026</div>
+      </div>
+    </header>
+    <section class="wrap intro reveal" id="project">
+      <div><div class="label">The project</div><h2>Less machine.<br><em>More possibility.</em></h2></div>
+      <div class="intro-copy"><p>The Tiny Version is an experimental project to rethink the desktop 3D printer at a much smaller scale. The goal: a compact enclosed CoreXY machine that still feels considered, capable, and fun to use.</p><p>It is a work in progress, shared openly as the design takes shape. Every part is an opportunity to learn how a little printer can do a lot.</p><a class="text-link" href="#roadmap">See how it’s coming together <span>↘</span></a></div>
+    </section>
+    <section class="wrap details reveal" id="details">
+      <div class="section-head"><div><div class="label">Current direction</div><h2 class="section-heading">Built around<br><em>the essentials.</em></h2></div><p class="section-note">Early project targets and design choices. Specifications may change as the prototype develops.</p></div>
+      <button class="portable-card" type="button" aria-expanded="false" aria-controls="portable-panel"><span class="portable-card-copy"><span class="portable-icon" aria-hidden="true">↗</span><span><span class="label">Concept / portable setup</span><h3>Portable P1S</h3><p>A battery-powered setup concept for taking the printer beyond the workshop.</p></span></span><span class="portable-open" aria-hidden="true">+</span></button>
+      <div class="portable-panel" id="portable-panel" hidden><div class="portable-panel-head"><div><div class="label">The idea &amp; what you need</div><h3>Power your prints away from the wall.</h3><p>The concept is to run a Bambu Lab P1S from a portable 24V battery system, so the printer can be used where mains power is not available. A USB-C connection is for charging or powering compatible accessories; the printer itself needs a suitable high-power DC-to-AC inverter or a properly engineered DC supply.</p></div><button class="close-panel" type="button" aria-label="Close portable P1S details">×</button></div><div class="portable-grid"><article class="portable-item"><b>01 · 24V battery system</b><p>Choose a battery with enough capacity and continuous output for the printer and its peak loads. Battery voltage and current must match the selected power architecture.</p></article><article class="portable-item"><b>02 · USB-C PD charger</b><p>Use a USB-C Power Delivery charger compatible with the battery’s input. USB-C is for charging the battery or small accessories, not a direct P1S power connection.</p></article><article class="portable-item"><b>03 · Power conversion</b><p>For the P1S, plan for a correctly rated inverter and safe cables, connectors, fuse, and enclosure. Confirm the printer’s actual input and startup load before buying parts.</p></article></div><div class="portable-extra"><h4>Useful extras</h4><p>Battery state-of-charge display · spare fused cable · sturdy carry case · ventilation clearance · optional USB-C PD output for a phone or LED work light.</p></div><p class="portable-disclaimer">Planning concept only: the P1S is a high-power appliance. Do not connect a 24V battery directly to the printer or assume USB-C can power it. Have the complete system sized and checked by someone qualified before use.</p></div>
+      <div class="spec-grid"><div class="spec"><strong>CoreXY</strong><span>Motion system</span></div><div class="spec"><strong>70 mm</strong><span>Target build width</span></div><div class="spec"><strong>24 V</strong><span>Target electronics</span></div><div class="spec"><strong>Enclosed</strong><span>Compact form factor</span></div></div>
+    </section>
+    <section class="principles reveal"><div class="wrap"><div class="principles-top"><div><div class="label">Design principles</div><h2 class="section-heading">Small, with<br><em>purpose.</em></h2></div><p>A tiny printer has to earn every millimeter. These are the ideas guiding the design.</p></div>
+      <div class="cards"><article class="card"><div class="card-top"><span class="card-num">01</span><span class="card-icon" aria-hidden="true">⌁</span></div><div><h3>Motion, thoughtfully scaled</h3><p>A compact CoreXY layout designed around the needs and constraints of a much smaller machine.</p></div></article><article class="card"><div class="card-top"><span class="card-num">02</span><span class="card-icon" aria-hidden="true">□</span></div><div><h3>A proper enclosure</h3><p>A neat, enclosed chamber brings the machine together as a considered desktop object.</p></div></article><article class="card"><div class="card-top"><span class="card-num">03</span><span class="card-icon" aria-hidden="true">↗</span></div><div><h3>Made to be shared</h3><p>An open project made for curious builders to follow, learn from, and improve together.</p></div></article></div>
+    </div></section>
+    <section class="wrap roadmap reveal" id="roadmap"><div class="roadmap-layout"><div class="roadmap-intro"><div class="label">The roadmap</div><h2 class="section-heading">From sketch<br>to <em>first print.</em></h2><p>The machine is being developed in stages, with each step informing the next. This is an evolving project, and the plan will evolve with it.</p></div>
+      <div class="steps"><article class="step"><span class="step-number">01</span><div><h3>Explore the architecture</h3><p>Study compact CoreXY layouts, packaging, and the parts that set the printer’s overall size.</p></div><span class="status active">In progress</span></article><article class="step"><span class="step-number">02</span><div><h3>Build the mechanics</h3><p>Design and test the frame, motion system, toolhead, and filament path.</p></div><span class="status">Next up</span></article><article class="step"><span class="step-number">03</span><div><h3>Bring in the electronics</h3><p>Fit the controller, drivers, sensors, and hotend into the compact layout.</p></div><span class="status">Planned</span></article><article class="step"><span class="step-number">04</span><div><h3>Make the first print</h3><p>Turn the prototype into a working miniature printer that can make real parts.</p></div><span class="status">The goal</span></article></div>
+    </div></section>
+    <section class="beta reveal" id="beta"><div class="wrap"><div class="beta-head"><div><div class="label">Join the testing team</div><h2 class="section-heading">Become a<br><em>beta tester.</em></h2></div><p class="beta-intro">Help test The Tiny Version, share your feedback, and build alongside the community. Here’s how to get started.</p></div><div class="beta-steps"><article class="beta-step"><div class="beta-step-top"><span class="beta-number">01</span><span class="beta-arrow">↗</span></div><div><h3>Join our Discord</h3><p>Enter the community and say hello.</p></div></article><article class="beta-step"><div class="beta-step-top"><span class="beta-number">02</span><span class="beta-arrow">↗</span></div><div><h3>Open the Beta Form</h3><p>Find the beta form in the Discord server.</p></div></article><article class="beta-step"><div class="beta-step-top"><span class="beta-number">03</span><span class="beta-arrow">↗</span></div><div><h3>Fill it out</h3><p>Tell us a little about yourself and your experience.</p></div></article><article class="beta-step"><div class="beta-step-top"><span class="beta-number">04</span><span class="beta-arrow">↗</span></div><div><h3>Wait for review</h3><p>Allow 3 days to 1 week for a response.</p></div></article><article class="beta-step"><div class="beta-step-top"><span class="beta-number">05</span><span class="beta-arrow">↗</span></div><div><h3>Get Google Drive access</h3><p>Accepted testers receive access to the project files.</p></div></article><article class="beta-step"><div class="beta-step-top"><span class="beta-number">06</span><span class="beta-arrow">✳</span></div><div><h3>Start building!</h3><p>Follow the files and begin your Tiny Version build.</p></div></article></div><p class="beta-note">Beta access is subject to review and availability. Please watch Discord for updates.</p></div></section>
+    <section class="wrap faq reveal" id="faq"><div><div class="label">Good to know</div><h2>A few quick<br><em>answers.</em></h2></div><div class="faq-list"><details><summary>Is this a finished printer?</summary><p>No. The Tiny Version is an experimental project in development. The roadmap reflects the current direction, and specifications may change as the design is tested.</p></details><details><summary>Can I build one today?</summary><p>The project is still taking shape. Check the GitHub page for the latest files and updates, and join Discord to follow progress and talk with the community.</p></details><details><summary>What does “70 mm” mean?</summary><p>It is the current target build width, not a finalized specification. The usable build volume will be confirmed as the prototype develops.</p></details><details><summary>How can I follow or contribute?</summary><p>Follow the project on GitHub, join the Discord community, and share questions, ideas, and feedback as the design progresses.</p></details></section>
+    <section class="wrap join reveal" id="community"><div><div class="label">Follow along</div><h2>Make room for<br><em>small ideas.</em></h2><p>Follow the build, explore the files, and join the maker community.</p></div><div class="join-actions"><a class="pill primary" href="https://github.com/hddyhb32-creator" target="_blank" rel="noopener noreferrer">Explore on GitHub <span>↗</span></a><a class="pill" href="https://discord.gg/AghCkgQVH" target="_blank" rel="noopener noreferrer">Join Discord <span>↗</span></a></div></section>
+  </main>
+  <footer><div class="footer-brand">TINY VERSION <span style="font-weight:400;color:var(--muted)"> / independent 3D printer project</span></div><div class="footer-right"><span>Experimental project · 2026</span><a href="#top">Back to top ↑</a></div></footer>
+  <script>
+    const journalBackdrop = document.querySelector('#journal-backdrop');
+    const journalOpen = document.querySelector('#journal-open');
+    const journalClose = document.querySelector('#journal-close');
+    const journalForm = document.querySelector('#journal-form');
+    const journalList = document.querySelector('#journal-list');
+    const journalSubmit = document.querySelector('#journal-submit');
+    const journalToast = document.querySelector('#journal-toast');
+    let journalDatabase;
+
+    function openJournalDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('tiny-version-build-journal', 1);
+        request.onupgradeneeded = () => request.result.createObjectStore('entries', { keyPath: 'id', autoIncrement: true });
+        request.onsuccess = () => { journalDatabase = request.result; resolve(journalDatabase); };
+        request.onerror = () => reject(request.error);
+      });
+    }
+    function journalRequest(mode, operation) {
+      return new Promise((resolve, reject) => {
+        const transaction = journalDatabase.transaction('entries', mode);
+        const request = operation(transaction.objectStore('entries'));
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+    function openJournal() {
+      journalBackdrop.classList.add('open');
+      journalBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      journalClose.focus();
+      renderJournal();
+    }
+    function closeJournal() {
+      journalBackdrop.classList.remove('open');
+      journalBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      journalOpen.focus();
+    }
+    function renderJournal() {
+      if (!journalDatabase) return;
+      journalRequest('readonly', store => store.getAll()).then(entries => {
+        entries.sort((a, b) => b.createdAt - a.createdAt);
+        journalList.replaceChildren();
+        if (!entries.length) {
+          const empty = document.createElement('p');
+          empty.className = 'journal-empty';
+          empty.textContent = 'No build updates yet. Add the first one when you’re ready.';
+          journalList.append(empty);
+          return;
+        }
+        entries.forEach(entry => {
+          const article = document.createElement('article');
+          article.className = 'journal-entry';
+          const time = document.createElement('time');
+          time.dateTime = new Date(entry.createdAt).toISOString();
+          time.textContent = new Date(entry.createdAt).toLocaleString(undefined, { dateStyle: 'long', timeStyle: 'short' });
+          const text = document.createElement('p');
+          text.textContent = entry.text;
+          article.append(time, text);
+          if (entry.photos?.length) entry.photos.forEach(photo => {
+            const image = document.createElement('img');
+            image.src = photo;
+            image.alt = 'Photo attached to a build journal entry';
+            image.loading = 'lazy';
+            article.append(image);
+          });
+          journalList.append(article);
+        });
+      }).catch(() => { journalList.textContent = 'Could not load the journal in this browser.'; });
+    }
+    function shrinkJournalPhoto(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(reader.error);
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error('Could not read image'));
+          image.onload = () => {
+            const scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+            canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', 0.78));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    journalOpen.addEventListener('click', openJournal);
+    journalClose.addEventListener('click', closeJournal);
+    journalBackdrop.addEventListener('click', event => { if (event.target === journalBackdrop) closeJournal(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && journalBackdrop.classList.contains('open')) closeJournal(); });
+    journalForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      journalSubmit.disabled = true;
+      try {
+        const files = [...document.querySelector('#journal-photos').files];
+        if (files.length > 6) throw new Error('Please add up to 6 photos per update.');
+        const photos = await Promise.all(files.map(shrinkJournalPhoto));
+        await journalRequest('readwrite', store => store.add({ text: document.querySelector('#journal-text').value.trim(), photos, createdAt: Date.now() }));
+        journalForm.reset();
+        renderJournal();
+      } catch (error) {
+        window.alert(error.message || 'Could not save this entry. Your browser storage may be full.');
+      } finally { journalSubmit.disabled = false; }
+    });
+    openJournalDatabase().then(renderJournal).catch(() => {
+      journalList.textContent = 'Journal storage is unavailable. Try opening this page in a modern browser.';
+    });
+    window.setTimeout(() => {
+      journalToast.classList.add('show');
+      window.setTimeout(() => journalToast.classList.remove('show'), 3000);
+    }, 250);
+
+    const portableToggle = document.querySelector('.portable-card');
+    const portablePanel = document.querySelector('#portable-panel');
+    const portableClose = document.querySelector('.close-panel');
+    function setPortablePanel(open) {
+      portablePanel.hidden = !open;
+      portableToggle.setAttribute('aria-expanded', String(open));
+      portableToggle.querySelector('.portable-open').textContent = open ? '−' : '+';
+    }
+    portableToggle.addEventListener('click', () => setPortablePanel(portablePanel.hidden));
+    portableClose.addEventListener('click', () => { setPortablePanel(false); portableToggle.focus(); });
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries, activeObserver) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); activeObserver.unobserve(entry.target); } });
+      }, { threshold: 0.12 });
+      items.forEach(item => observer.observe(item));
+    } else { items.forEach(item => item.classList.add('visible')); }
+  </script>
+</body>
+</html>
